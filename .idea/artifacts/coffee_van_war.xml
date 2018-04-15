@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="coffee-van:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="servlet-test.war">
+      <element id="artifact" artifact-name="coffee-van:war exploded" />
+    </root>
+  </artifact>
+</component>
