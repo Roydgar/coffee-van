@@ -4,10 +4,13 @@ import org.junit.Test;
 import ua.training.model.dao.CoffeeDao;
 import ua.training.model.dao.DaoFactory;
 import ua.training.model.dao.UserDao;
+import ua.training.model.entity.CoffeeState;
 import ua.training.model.entity.User;
+import ua.training.model.entity.builder.CoffeeBuilder;
 import ua.training.model.entity.builder.UserBuilder;
 import ua.training.model.dao.util.ConnectionUtils;
 
+import java.math.BigDecimal;
 import java.sql.*;
 
 public class DatabaseTest {
@@ -43,9 +46,9 @@ public class DatabaseTest {
 
     @Test
     public void testCreate() {
-       //coffeeDao.create(new CoffeeBuilder().setName("Big Bean").setWeight(500).
-        //               setState(CoffeeState.BEANS).setPrice(new BigDecimal("13.25")).buildCoffee());
-        userDao.create(new UserBuilder().setUsername("pups").setPassword("228666").setRole(User.Role.ADMIN).buildUser());
+      // coffeeDao.create(new CoffeeBuilder().setName("Big Black Bean").setWeight(5)
+                      //.setState(CoffeeState.BEANS).setPrice(new BigDecimal("1.5")).buildCoffee());
+        //userDao.create(new UserBuilder().setUsername("pups").setPassword("228666").setRole(User.Role.ADMIN).buildUser());
     }
 
     @Test

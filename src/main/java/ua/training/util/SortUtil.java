@@ -1,4 +1,4 @@
-package ua.training.model.service;
+package ua.training.util;
 
 import ua.training.model.entity.Coffee;
 
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class SortService {
+public class SortUtil {
     public static List<Coffee> sortCoffees(List<Coffee> coffees, HttpServletRequest request) {
         String sortBy = request.getParameter("sortBy") == null ? "name" : request.getParameter("sortBy");
 

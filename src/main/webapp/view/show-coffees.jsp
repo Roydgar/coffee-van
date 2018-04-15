@@ -57,10 +57,13 @@
 
 </div>
 
+<form method="post" action="/show-coffees">
+    <button value="reset" name="reset" id="Reset">Reset filters</button>
+</form>
 <h2><c:out value="${requestScope.fullCoffeeVan}"/> </h2>
 
 
-<c:set var="letters" scope="session" value="${requestScope.coffees}"/>
+<%-- <c:set var="letters" scope="session" value="${requestScope.coffees}"/>
 <c:set var="totalCount" scope="session" value="${fn:length(coffees)}"/>
 <c:set var="perPage" scope="session"  value="${3}"/>
 <c:set var="pageStart" value="${param.start}"/>
@@ -104,8 +107,38 @@
 
     </ul>
     <hr/>
-</c:forEach>
+</c:forEach> --%>
 
+
+<h1>Coffees available:</h1>
+
+<c:forEach var="coffee" items="${sessionScope.coffees}">
+    <ul>
+
+        <li>Name: <c:out value="${coffee.name}"/></li>
+
+        <li>Type: <c:out value="${coffee.state}"/></li>
+
+        <li>Weight: <c:out value="${coffee.weight}"/></li>
+
+        <li>Price: <c:out value="${coffee.price}"/> $</li>
+
+        <form method="post" action="/show-coffees">
+            <label for="count">Count to order:</label>
+            <br>
+
+            <input type="number" id = "count" name="count" min=0 max=999 value=0
+                   required pattern="^(?![0-9]{4,})[0-9]{1,3}$"/></label><br>
+
+            <input type="number"  hidden name="id" value="${coffee.id}" />
+
+            <br>
+            <input type="submit" value="Add to the van" name="ok"><br>
+        </form>
+
+    </ul>
+    <hr/>
+</c:forEach>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-package ua.training.model.service;
+package ua.training.util;
 
 import ua.training.model.entity.Coffee;
 
@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 
-public class SearchService {
+public class SearchUtil {
     public static List<Coffee> searchCoffees(List<Coffee> coffees, HttpServletRequest request) {
         String searchBy = request.getParameter("searchBy");
 

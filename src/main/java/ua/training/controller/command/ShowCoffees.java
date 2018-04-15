@@ -7,12 +7,18 @@ import ua.training.model.service.CustomOrderService;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.List;
+
 import static ua.training.util.constants.URLs.*;
 
 public class ShowCoffees implements Command{
     @Override
     public String execute(HttpServletRequest request) {
-        request.setAttribute("coffees",  CoffeeDaoService.findAll());
+        @SuppressWarnings("unchecked")
+        List<Coffee> coffees = (List<Coffee>)request.getSession().getAttribute("coffees");
+
+        request.getSession().setAttribute("coffees", coffees == null || request.getParameter("reset") != null
+                ? CoffeeDaoService.findAll() : coffees);
 
         int countToOrder = request.getParameter("count") == null ? 0
                 : Integer.parseInt(request.getParameter("count"));
