@@ -45,7 +45,7 @@ public class DatabaseTest {
     public void testCreate() {
        //coffeeDao.create(new CoffeeBuilder().setName("Big Bean").setWeight(500).
         //               setState(CoffeeState.BEANS).setPrice(new BigDecimal("13.25")).buildCoffee());
-        userDao.create(new UserBuilder().setUsername("Divan").setPassword("0000").setRole(User.Role.USER).buildUser());
+        userDao.create(new UserBuilder().setUsername("pups").setPassword("228666").setRole(User.Role.ADMIN).buildUser());
     }
 
     @Test
@@ -60,10 +60,11 @@ public class DatabaseTest {
 
     @Test
     public void testLogin() {
-        System.out.println(userDao.userExists("Divan", "0000"));
+        System.out.println(userDao.userExists("Divan"));
     }
     @Test
     public void testDelete(){
+        userDao.delete(1); userDao.delete(2) ; userDao.delete(3);;
     }
 
 

@@ -17,5 +17,6 @@ public interface Queries {
     String USER_FIND_ALL       = bundle.getString("query.user.findAll");
     String USER_UPDATE         = bundle.getString("query.user.update");
     String USER_DELETE         = bundle.getString("query.user.delete");
-    String USER_LOGIN      = bundle.getString("query.user.login");
+    String USER_LOGIN          = bundle.getString("query.user.login");
+    String USER_FIND_BY_USERNAME = bundle.getString("query.user.findByUsername");
 }

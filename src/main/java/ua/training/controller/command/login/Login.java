@@ -17,11 +17,11 @@ public class Login implements Command {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if (username == null && password == null) {
+        if (username == null || password == null) {
             return REDIRECT_LOGIN_PAGE;
         }
 
-        Optional<User> user = Optional.ofNullable(UserDaoService.login(username, password));
+        Optional<User> user = Optional.ofNullable(UserDaoService.login(username.toString(), password));
 
         if (!user.isPresent()) {
             request.getSession().setAttribute("loginError", "Wrong login or password!");

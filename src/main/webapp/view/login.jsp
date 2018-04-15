@@ -16,7 +16,7 @@
 <form method="post" action="/login">
     <label for="Username">Username:</label>
 
-    <input type="text" id = "Username" name="username" pattern="^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$"/>
+    <input type="text" id = "Username" name="username" pattern="^[a-z0-9_-]{3,16}$"/>
 
     <br>
 
@@ -29,6 +29,9 @@
     <input class="button" type="submit" value="Login">
 
 </form>
+
+<br>
+<a href="${pageContext.request.contextPath}/registration">Registration</a>
 
 </body>
 </html>
