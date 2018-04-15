@@ -4,6 +4,8 @@ import ua.training.controller.command.Command;
 import ua.training.model.entity.User;
 import ua.training.model.entity.builder.UserBuilder;
 import ua.training.model.service.UserDaoService;
+import ua.training.util.constants.AttributeNames;
+import ua.training.util.constants.Messages;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,22 +15,22 @@ import static ua.training.util.constants.URLs.REDIRECT_REGISTRATION_PAGE;
 public class Registration implements Command {
     @Override
     public String execute(HttpServletRequest request) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String confirmPassword = request.getParameter("confirmPassword");
-        System.out.println("UP: " + username + "; " + password);
+        String username = request.getParameter(AttributeNames.USERNAME);
+        String password = request.getParameter(AttributeNames.PASSWORD);
+        String confirmPassword = request.getParameter(AttributeNames.CONFIRM_PASSWORD);
 
         if (username == null || password == null || confirmPassword == null) {
             return REDIRECT_REGISTRATION_PAGE;
         }
 
         if (UserDaoService.userExists(username)) {
-            request.getSession().setAttribute("registrationError", "User with this login already exists");
+            request.getSession().setAttribute(AttributeNames.REGISTRATION_ERROR,
+                    Messages.NOT_UNIQUE_LOGIN_ERROR);
             return REDIRECT_REGISTRATION_PAGE;
         }
 
         if (!password.equals(confirmPassword)) {
-            request.getSession().setAttribute("registrationError", "Passwords dont match.");
+            request.getSession().setAttribute(AttributeNames.REGISTRATION_ERROR, Messages.PASSWORD_DONT_MATCH_ERROR);
             return REDIRECT_REGISTRATION_PAGE;
         }
 
