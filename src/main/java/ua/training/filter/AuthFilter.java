@@ -2,6 +2,8 @@ package ua.training.filter;
 
 import com.sun.deploy.net.HttpRequest;
 import ua.training.model.entity.User;
+import ua.training.util.constants.AttributeNames;
+import ua.training.util.constants.GlobalConstants;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
@@ -23,10 +25,10 @@ public class AuthFilter implements Filter{
         HttpServletRequest req = (HttpServletRequest)request;
         HttpServletResponse resp = (HttpServletResponse)response;
 
-        User user = (User)req.getSession().getAttribute("user");
+        User user = (User)req.getSession().getAttribute(AttributeNames.USER);
         String url =  req.getRequestURI();
 
-        if (url.contains("admin") && !user.isAdmin()){
+        if (url.contains(GlobalConstants.ADMIN_PATTERN) && !user.isAdmin()){
             resp.sendRedirect(LOGIN_PAGE);
             return;
         }
