@@ -1,3 +1,0 @@
-2018-04-15 19:57:07 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Table "COFFEE" not found; SQL statement:
-SELECT * FROM coffee [42102-196]
