@@ -3,6 +3,7 @@ package ua.training.controller.command;
 import ua.training.model.entity.Coffee;
 import ua.training.model.service.CoffeeDaoService;
 import ua.training.model.service.CustomOrderService;
+import ua.training.util.constants.AttributeNames;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,10 +15,10 @@ public class DeleteCoffee implements Command {
         Coffee coffee = CoffeeDaoService.findById(Integer.parseInt(request.getParameter("id")));
         CustomOrderService.deleteFromOrder(coffee);
 
-        request.setAttribute("order", CustomOrderService.getOrder());
-        request.setAttribute("totalPrice", CustomOrderService.getTotalPrice());
-        request.setAttribute("totalWeight", CustomOrderService.getTotalWeight());
-        request.setAttribute("maxWeight", CustomOrderService.getMaxWeight());
+        request.setAttribute(AttributeNames.ORDER, CustomOrderService.getOrder());
+        request.setAttribute(AttributeNames.TOTAL_PRICE, CustomOrderService.getTotalPrice());
+        request.setAttribute(AttributeNames.TOTAL_WEIGHT, CustomOrderService.getTotalWeight());
+        request.setAttribute(AttributeNames.MAX_WEIGHT, CustomOrderService.getMaxWeight());
 
         return SHOW_COFFEE_VAN_PAGE;
     }
