@@ -3,7 +3,6 @@ package ua.training.servlet;
 import ua.training.controller.command.*;
 import ua.training.controller.command.login.Login;
 import ua.training.controller.command.login.Registration;
-import ua.training.model.service.DaoService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -62,6 +61,5 @@ public class StartPageServlet extends HttpServlet {
 
     @Override
     public void destroy(){
-        DaoService.close();
     }
 }

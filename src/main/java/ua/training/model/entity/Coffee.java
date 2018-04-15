@@ -5,30 +5,30 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class Coffee {
-    private Optional<String> name;
+    private String name;
     private int weight;
-    private Optional<CoffeeState> state;
+    private CoffeeState state;
     private int id;
-    private Optional<BigDecimal> price;
+    private BigDecimal price;
 
-    public Coffee(String name, int weight, CoffeeState state, BigDecimal price) {
-        this(0, name, weight, state, price);
+
+    public Coffee() {
     }
 
     public Coffee(int id, String name, int weight, CoffeeState state, BigDecimal price) {
-        this.id = id;
-        this.name = Optional.of(name);
+        this.id     = id;
+        this.name   = name;
         this.weight = weight;
-        this.state = Optional.of(state);
-        this.price = Optional.of(price);
+        this.state  = state;
+        this.price  = price;
     }
 
     public String getName() {
-        return name.get();
+        return name;
     }
 
     public void setName(String name) {
-        this.name = Optional.of(name);
+        this.name = name;
     }
 
     public int getWeight() {
@@ -40,11 +40,11 @@ public class Coffee {
     }
 
     public CoffeeState getState() {
-        return state.get();
+        return state;
     }
 
     public void setState(CoffeeState state) {
-        this.state = Optional.of(state);
+        this.state = state;
     }
 
     public int getId() {
@@ -56,11 +56,11 @@ public class Coffee {
     }
 
     public BigDecimal getPrice() {
-        return price.get();
+        return price;
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = Optional.of(price);
+        this.price = price;
     }
 
     @Override
@@ -85,10 +85,10 @@ public class Coffee {
     public String toString() {
         return "Coffee{" +
                 "id=" + id +
-                "name=" + name.get() +
+                "name=" + name +
                 ", weight=" + weight +
-                ", state=" + state.get() +
-                ", price=" + price.get() +
+                ", state=" + state +
+                ", price=" + price +
                 '}';
     }
 }

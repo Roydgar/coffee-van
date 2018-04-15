@@ -1,29 +1,30 @@
 package ua.training.model.dao.impl;
 
 
-import ua.training.model.dao.CoffeesDao;
+import ua.training.model.dao.CoffeeDao;
 import ua.training.model.dao.impl.constants.ColumnNames;
 import ua.training.model.dao.impl.constants.Queries;
 import ua.training.model.entity.Coffee;
 import ua.training.model.entity.CoffeeState;
+import ua.training.model.entity.builder.CoffeeBuilder;
 
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JDBCCoffeesDao implements CoffeesDao {
+public class JDBCCoffeeDao implements CoffeeDao {
 
     private Connection connection;
 
-    JDBCCoffeesDao(Connection connection) {
+    JDBCCoffeeDao(Connection connection) {
         this.connection = connection;
     }
 
     @Override
     public void create(Coffee coffee) {
         try (PreparedStatement ps = connection.prepareStatement
-                (Queries.CREATE)){
+                (Queries.COFFEE_CREATE)){
 
             ps.setString(1 , coffee.getName());
             ps.setInt(2 , coffee.getWeight());
@@ -39,7 +40,7 @@ public class JDBCCoffeesDao implements CoffeesDao {
     @Override
     public Coffee findById(int id) {
         try (PreparedStatement ps = connection.prepareStatement
-                (Queries.FIND_BY_ID)){
+                (Queries.COFFEE_FIND_BY_ID)){
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
             if( rs.next() ){
@@ -59,14 +60,15 @@ public class JDBCCoffeesDao implements CoffeesDao {
         int weight   =  rs.getInt(ColumnNames.COFFEE_WEIGHT);
         String state =  rs.getString(ColumnNames.COFFEE_STATE);
         String price =  rs.getString(ColumnNames.COFFEE_PRICE);
-        return new Coffee(id, name, weight, CoffeeState.valueOf(state), new BigDecimal(price));
+        return new CoffeeBuilder().setId(id).setName(name).setWeight(weight).
+                setState(CoffeeState.valueOf(state)).setPrice(new BigDecimal(price)).buildCoffee();
     }
 
     @Override
     public List<Coffee> findAll() {
         List<Coffee> resultList = new ArrayList<>();
         try (Statement ps = connection.createStatement()){
-            ResultSet rs = ps.executeQuery(Queries.FIND_ALL);
+            ResultSet rs = ps.executeQuery(Queries.COFFEE_FIND_ALL);
 
             while ( rs.next() ){
                 resultList.add(extractFromResultSet(rs));
@@ -81,7 +83,7 @@ public class JDBCCoffeesDao implements CoffeesDao {
     @Override
     public void update(Coffee coffee) {
         try (PreparedStatement ps = connection.prepareStatement(
-                Queries.UPDATE)){
+                Queries.COFFEE_UPDATE)){
             ps.setString(1 , coffee.getName());
             ps.setInt(2 , coffee.getWeight());
             ps.setString(3 , coffee.getState().toString());
@@ -95,7 +97,7 @@ public class JDBCCoffeesDao implements CoffeesDao {
 
     @Override
     public void delete(int id) {
-        try (PreparedStatement ps = connection.prepareStatement(Queries.DELETE)){
+        try (PreparedStatement ps = connection.prepareStatement(Queries.COFFEE_DELETE)){
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {

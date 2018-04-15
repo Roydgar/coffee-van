@@ -1,41 +1,41 @@
 package ua.training;
 
 import org.junit.Test;
-import ua.training.model.dao.CoffeesDao;
+import ua.training.model.dao.CoffeeDao;
 import ua.training.model.dao.DaoFactory;
-import ua.training.model.entity.Coffee;
-import ua.training.model.entity.CoffeeState;
-import ua.training.model.util.ConnectionUtils;
+import ua.training.model.dao.UserDao;
+import ua.training.model.entity.User;
+import ua.training.model.entity.builder.UserBuilder;
+import ua.training.model.dao.util.ConnectionUtils;
 
-import java.math.BigDecimal;
 import java.sql.*;
 
 public class DatabaseTest {
-    CoffeesDao dao = DaoFactory.getInstance().createCoffeesDao();
-
+    CoffeeDao coffeeDao = DaoFactory.getInstance().createCoffeeDao();
+    UserDao   userDao   = DaoFactory.getInstance().createUserDao();
     @Test
     public void testConnection() {
         try {
-            /*Connection con = ConnectionUtils.getCoffeesDbConnection();
+            Connection con = ConnectionUtils.getCoffeeDbConnection();
             Statement statement = con.createStatement();
-            statement.executeUpdate("CREATE TABLE coffees (" +
-                    "  id INT NOT NULL AUTO_INCREMENT," +
-                    "  name VARCHAR(45) NULL," +
-                    "  weight INT NULL," +
-                    "  state VARCHAR(45) NULL," +
-                    "  price VARCHAR(45) NULL," +
-                    "  PRIMARY KEY (id))");*/
+            statement.executeUpdate("CREATE TABLE coffee (" +
+                    "  coffeeId INT NOT NULL AUTO_INCREMENT," +
+                    "  name VARCHAR(255) NOT NULL," +
+                    "  weight INT NOT NULL," +
+                    "  state VARCHAR(45) NOT NULL," +
+                    "  price VARCHAR(45) NOT NULL," +
+                    "  PRIMARY KEY (coffeeId))");
 
-            Connection con = ConnectionUtils.getUsersDbConnection();
+            /*Connection con = ConnectionUtils.getUserDbConnection();
             Statement statement = con.createStatement();
 
-            statement.executeUpdate("CREATE TABLE users(" +
+            statement.executeUpdate("CREATE TABLE user(" +
                     "  userId INT NOT NULL AUTO_INCREMENT," +
                     "  username VARCHAR(255) NOT NULL," +
                     "  password VARCHAR(255) NOT NULL," +
-                    "  role INT NOT NULL," +
+                    "  role VARCHAR(40) NOT NULL," +
                     "  PRIMARY KEY (userId))");
-
+            */
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -43,23 +43,27 @@ public class DatabaseTest {
 
     @Test
     public void testCreate() {
-        dao.create(new Coffee("Pups power", 1000, CoffeeState.BEANS, new BigDecimal("5.5")));
-
+       //coffeeDao.create(new CoffeeBuilder().setName("Big Bean").setWeight(500).
+        //               setState(CoffeeState.BEANS).setPrice(new BigDecimal("13.25")).buildCoffee());
+        userDao.create(new UserBuilder().setUsername("Divan").setPassword("0000").setRole(User.Role.USER).buildUser());
     }
 
     @Test
     public void testFindAll(){
-        System.out.println(dao.findAll());
+        System.out.println(userDao.findAll());
     }
 
     @Test
     public void testFindById() {
-        System.out.println(dao.findById(1));
+        System.out.println(userDao.findById(2));
     }
 
     @Test
+    public void testLogin() {
+        System.out.println(userDao.userExists("Divan", "0000"));
+    }
+    @Test
     public void testDelete(){
-        dao.delete(7); dao.delete(8);
     }
 
 

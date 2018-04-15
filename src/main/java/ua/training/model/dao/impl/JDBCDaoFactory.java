@@ -1,25 +1,30 @@
 package ua.training.model.dao.impl;
 
-import ua.training.model.dao.CoffeesDao;
+import ua.training.model.dao.CoffeeDao;
 import ua.training.model.dao.DaoFactory;
-import ua.training.model.util.ConnectionUtils;
+import ua.training.model.dao.UserDao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import static ua.training.model.dao.util.ConnectionUtils.getCoffeeDbConnection;
+import static ua.training.model.dao.util.ConnectionUtils.getUserDbConnection;
 
 public class JDBCDaoFactory extends DaoFactory {
     @Override
-    public CoffeesDao createCoffeesDao() {
-        return new JDBCCoffeesDao(getConnection());
-    }
-
-    private Connection getConnection(){
+    public CoffeeDao createCoffeeDao() {
         try {
-            return ConnectionUtils.getCoffeesDbConnection();
+            return new JDBCCoffeeDao(getCoffeeDbConnection());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    @Override
+    public UserDao createUserDao() {
+        try {
+            return new JDBCUserDao(getUserDbConnection());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

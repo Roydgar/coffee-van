@@ -1,8 +1,8 @@
 package ua.training.controller.command;
 
 import ua.training.model.entity.Coffee;
+import ua.training.model.service.CoffeeDaoService;
 import ua.training.model.service.CustomOrderService;
-import ua.training.model.service.DaoService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,7 +11,7 @@ import static ua.training.util.constants.URLs.SHOW_COFFEE_VAN_PAGE;
 public class DeleteCoffee implements Command {
     @Override
     public String execute(HttpServletRequest request) {
-        Coffee coffee = DaoService.findById(Integer.parseInt(request.getParameter("id")));
+        Coffee coffee = CoffeeDaoService.findById(Integer.parseInt(request.getParameter("id")));
         CustomOrderService.deleteFromOrder(coffee);
 
         request.setAttribute("order", CustomOrderService.getOrder());

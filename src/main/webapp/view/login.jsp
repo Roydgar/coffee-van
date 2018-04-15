@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -7,6 +8,9 @@
 <body>
 
 <h2>Login</h2>
+<br>
+
+<h2><c:out value="${sessionScope.loginError}"/> </h2>
 <br>
 
 <form method="post" action="/login">
