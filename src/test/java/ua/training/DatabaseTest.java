@@ -53,12 +53,12 @@ public class DatabaseTest {
 
     @Test
     public void testFindAll(){
-        System.out.println(userDao.findAll());
+        System.out.println(coffeeDao.findAll());
     }
 
     @Test
     public void testFindById() {
-        System.out.println(userDao.findById(2));
+        System.out.println(coffeeDao.findById(3));
     }
 
     @Test

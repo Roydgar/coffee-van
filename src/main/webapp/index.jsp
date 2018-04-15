@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<h1>Hello from Java Vision!</h1><br />
+<h1>Hello, friend! Welcome to the Coffee Shop "Big Black Beans"</h1><br />
 
 <div class="auth">
     <a href="${pageContext.request.contextPath}/login">Login</a>

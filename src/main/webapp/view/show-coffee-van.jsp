@@ -9,9 +9,15 @@
 <body>
 
 <br>
-<br>
-<br>
 
+
+<form method="post" action="/logout">
+    <input type="submit" value="Logout" name="logout"><br>
+</form>
+
+<br>
+<br>
+<br>
 
 Total weight: <c:out value="${requestScope.totalWeight}"/> g.
 <br>

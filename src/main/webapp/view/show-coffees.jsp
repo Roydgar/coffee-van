@@ -11,6 +11,11 @@
 <div class="show coffee van">
     <a href="${pageContext.request.contextPath}/show-coffee-van">Show coffee van</a>
 </div>
+
+<form method="post" action="/logout">
+    <input type="submit" value="Logout" name="logout"><br>
+</form>
+
 <br>
 <div class="sort">
     <form method="post" action="/sort-coffees">
@@ -109,6 +114,12 @@
     <hr/>
 </c:forEach> --%>
 
+<c:if test="${sessionScope.user.admin}">
+    <form method="post" action="/admin-addCoffee">
+        <input type="submit" value="Add new Coffee" name="addCoffee"><br>
+    </form>
+
+</c:if>
 
 <h1>Coffees available:</h1>
 
@@ -123,8 +134,23 @@
 
         <li>Price: <c:out value="${coffee.price}"/> $</li>
 
+        <c:if test="${sessionScope.user.admin}">
+
+            <form method="post" action="/admin-removeCoffee">
+                <input type="submit" value="Delete" name="deleteCoffee"><br>
+                <input type="number"  hidden name="id" value="${coffee.id}" />
+            </form>
+
+            <form method="post" action="/admin-editCoffee">
+                <input type="submit" value="Edit" name="editCoffee"><br>
+                <input type="number"  hidden name="id" value="${coffee.id}" />
+            </form>
+
+        </c:if>
+
         <form method="post" action="/show-coffees">
             <label for="count">Count to order:</label>
+
             <br>
 
             <input type="number" id = "count" name="count" min=0 max=999 value=0

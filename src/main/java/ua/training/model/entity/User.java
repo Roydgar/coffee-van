@@ -51,6 +51,7 @@ public class User {
         this.role = role;
     }
 
+    public boolean isAdmin() {return role == Role.ADMIN; }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

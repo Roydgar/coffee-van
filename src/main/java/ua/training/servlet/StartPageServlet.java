@@ -1,7 +1,11 @@
 package ua.training.servlet;
 
 import ua.training.controller.command.*;
+import ua.training.controller.command.admin.AddCoffee;
+import ua.training.controller.command.admin.EditCoffee;
+import ua.training.controller.command.admin.RemoveCoffee;
 import ua.training.controller.command.login.Login;
+import ua.training.controller.command.login.Logout;
 import ua.training.controller.command.login.Registration;
 
 import javax.servlet.ServletException;
@@ -26,6 +30,10 @@ public class StartPageServlet extends HttpServlet {
         commands.put("delete-coffee", new DeleteCoffee());
         commands.put("login", new Login());
         commands.put("registration", new Registration());
+        commands.put("logout", new Logout());
+        commands.put("admin-addCoffee", new AddCoffee());
+        commands.put("admin-removeCoffee", new RemoveCoffee());
+        commands.put("admin-editCoffee", new EditCoffee());
     }
 
 
@@ -49,9 +57,9 @@ public class StartPageServlet extends HttpServlet {
 
         Command command = commands.getOrDefault(path,
                 (r)->"index.jsp");
-
+        System.out.println(path);
         String page = command.execute(request);
-
+        System.out.println(page);
         if(page.contains("redirect")){
             response.sendRedirect(page.replace("redirect:", ""));
         }else {
