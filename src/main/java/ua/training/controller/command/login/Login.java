@@ -23,7 +23,7 @@ public class Login implements Command {
             return REDIRECT_LOGIN_PAGE;
         }
 
-        Optional<User> user = Optional.ofNullable(UserDaoService.login(username.toString(), password));
+        Optional<User> user = Optional.ofNullable(UserDaoService.login(username, password));
 
         if (!user.isPresent()) {
             request.getSession().setAttribute(AttributeNames.LOGIN_ERROR, Messages.LOGIN_ERROR);
