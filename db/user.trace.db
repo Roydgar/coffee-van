@@ -1,0 +1,6 @@
+2018-04-15 20:16:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM USER WHERE USERNAME = ?,[*] PASSWORD = ? "; SQL statement:
+SELECT * FROM user WHERE username = ?, password = ? [42000-196]
+2018-04-15 20:16:48 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM USER WHERE USERNAME = ? PASSWORD[*] = ? "; SQL statement:
+SELECT * FROM user WHERE username = ? password = ? [42000-196]
