@@ -18,4 +18,9 @@ public interface AttributeNames {
 
     String REGISTRATION_ERROR = "registrationError";
     String CONFIRM_PASSWORD   = "confirmPassword";
+
+    String NAME     = "name";
+    String PRICE    = "price";
+    String WEIGHT   = "weight";
+    String STATE    = "state";
 }
