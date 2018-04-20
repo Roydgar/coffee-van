@@ -1,16 +1,13 @@
 package ua.training.model.dao.impl;
 
-import ua.training.model.dao.CoffeeDao;
 import ua.training.model.dao.UserDao;
 import ua.training.model.dao.impl.constants.ColumnNames;
 import ua.training.model.dao.impl.constants.Queries;
 import ua.training.model.entity.User;
-import ua.training.model.entity.builder.UserBuilder;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class JDBCUserDao implements UserDao {
 
@@ -57,7 +54,7 @@ public class JDBCUserDao implements UserDao {
         String password  =  rs.getString(ColumnNames.USER_PASSWORD);
         String role      =  rs.getString(ColumnNames.USER_ROLE);
 
-        return new UserBuilder().setId(userId).setUsername(username).setPassword(password)
+        return new User.UserBuilder().setId(userId).setUsername(username).setPassword(password)
                 .setRole(User.Role.valueOf(role)).buildUser();
     }
 

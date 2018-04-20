@@ -6,7 +6,7 @@ public interface AttributeNames {
     String TOTAL_WEIGHT     = "totalWeight";
     String MAX_WEIGHT       = "maxWeight";
     String COFFEES          = "coffees";
-    String RESET            = "reset";
+    String RESET_FILTERS    = "reset";
     String COUNT            = "count";
     String FULL_COFFEE_VAN  = "fullCoffeeVan";
     String ID               = "id";

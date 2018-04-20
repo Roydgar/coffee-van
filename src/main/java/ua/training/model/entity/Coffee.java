@@ -2,7 +2,6 @@ package ua.training.model.entity;
 
 import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.Optional;
 
 public class Coffee {
     private String name;
@@ -90,5 +89,41 @@ public class Coffee {
                 ", state=" + state +
                 ", price=" + price +
                 '}';
+    }
+
+    public static class CoffeeBuilder {
+        private Coffee coffee = new Coffee();
+
+        public CoffeeBuilder() {
+        }
+
+        public CoffeeBuilder setId(int id) {
+            coffee.setId(id);
+            return this;
+        }
+
+        public CoffeeBuilder setName(String name) {
+            coffee.setName(name);
+            return this;
+        }
+
+        public CoffeeBuilder setWeight(int weight) {
+            coffee.setWeight(weight);
+            return this;
+        }
+
+        public CoffeeBuilder setPrice(BigDecimal price) {
+            coffee.setPrice(price);
+            return this;
+        }
+
+        public CoffeeBuilder setState(CoffeeState state) {
+            coffee.setState(state);
+            return this;
+        }
+
+        public Coffee buildCoffee() {
+            return coffee;
+        }
     }
 }

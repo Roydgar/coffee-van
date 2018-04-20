@@ -2,7 +2,7 @@ package ua.training.controller.command.login;
 
 import ua.training.controller.command.Command;
 import ua.training.model.entity.User;
-import ua.training.model.service.UserDaoService;
+import ua.training.util.UserDaoUtil;
 import ua.training.util.constants.AttributeNames;
 import ua.training.util.constants.Messages;
 
@@ -23,7 +23,7 @@ public class Login implements Command {
             return REDIRECT_LOGIN_PAGE;
         }
 
-        Optional<User> user = Optional.ofNullable(UserDaoService.login(username, password));
+        Optional<User> user = Optional.ofNullable(UserDaoUtil.login(username, password));
 
         if (!user.isPresent()) {
             request.getSession().setAttribute(AttributeNames.LOGIN_ERROR, Messages.LOGIN_ERROR);

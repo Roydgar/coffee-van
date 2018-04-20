@@ -4,31 +4,22 @@ import org.junit.Test;
 import ua.training.model.dao.CoffeeDao;
 import ua.training.model.dao.DaoFactory;
 import ua.training.model.dao.UserDao;
-import ua.training.model.entity.CoffeeState;
-import ua.training.model.entity.User;
-import ua.training.model.entity.builder.CoffeeBuilder;
-import ua.training.model.entity.builder.UserBuilder;
-import ua.training.model.dao.util.ConnectionUtils;
-
-import java.math.BigDecimal;
-import java.sql.*;
 
 public class DatabaseTest {
     CoffeeDao coffeeDao = DaoFactory.getInstance().createCoffeeDao();
     UserDao   userDao   = DaoFactory.getInstance().createUserDao();
     @Test
     public void testConnection() {
-        try {
-            Connection con = ConnectionUtils.getCoffeeDbConnection();
+
+            /*Connection con = ConnectionUtils.getCoffeeDbConnection();
             Statement statement = con.createStatement();
             statement.executeUpdate("CREATE TABLE coffee (" +
                     "  coffeeId INT NOT NULL AUTO_INCREMENT," +
                     "  name VARCHAR(255) NOT NULL," +
                     "  weight INT NOT NULL," +
                     "  state VARCHAR(45) NOT NULL," +
-                    "  price VARCHAR(45) NOT NULL," +
+                    "  price DECIMAL (10, 2) NOT NULL," +
                     "  PRIMARY KEY (coffeeId))");
-
             /*Connection con = ConnectionUtils.getUserDbConnection();
             Statement statement = con.createStatement();
 
@@ -39,9 +30,34 @@ public class DatabaseTest {
                     "  role VARCHAR(40) NOT NULL," +
                     "  PRIMARY KEY (userId))");
             */
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+            /*Connection con = ConnectionUtils.getOrderDbConnection();
+            con.createStatement().executeUpdate("CREATE TABLE orders(" +
+                    " orderId INT NOT NULL AUTO_INCREMENT, " +
+                    " userId INT NOT NULL," +
+                    " coffeeId INT NOT NULL," +
+                    " quantity INT NOT NULL ," +
+                    " date DATE NOT NULL," +
+                    " confirmed BOOLEAN NOT NULL, " +
+                    " FOREIGN KEY (userId) REFERENCES user(userId)," +
+                    " PRIMARY KEY(orderId))");
+
+
+                    /*.executeUpdate("CREATE TABLE order(" +
+                    " orderId INT NOT NULL AUTO_INCREMENT, " +
+                    " userId INT NOT NULL," +
+                    " coffeeId INT NOT NULL," +
+                    " quantity INT NOT NULL ," +
+                    " date DATE NOT NULL," +
+                    " confirmed BOOLEAN NOT NULL, " +
+                    " PRIMARY KEY(orderId)," +
+                    " FOREIGN KEY (userId) REFERENCES user(userId)," +
+                    " FOREIGN KEY (coffeeId) REFERENCES coffee(coffeeId))" );
+
+            con.createStatement().execute("ALTER TABLE order ADD FOREIGN KEY (userId)" +
+                    "REFERENCES PUBLIC.user(userId)"); /*/
+
+
     }
 
     @Test

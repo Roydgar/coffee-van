@@ -2,8 +2,7 @@ package ua.training.controller.command.login;
 
 import ua.training.controller.command.Command;
 import ua.training.model.entity.User;
-import ua.training.model.entity.builder.UserBuilder;
-import ua.training.model.service.UserDaoService;
+import ua.training.util.UserDaoUtil;
 import ua.training.util.constants.AttributeNames;
 import ua.training.util.constants.Messages;
 
@@ -23,7 +22,7 @@ public class Registration implements Command {
             return REDIRECT_REGISTRATION_PAGE;
         }
 
-        if (UserDaoService.userExists(username)) {
+        if (UserDaoUtil.userExists(username)) {
             request.getSession().setAttribute(AttributeNames.REGISTRATION_ERROR,
                     Messages.NOT_UNIQUE_LOGIN_ERROR);
             return REDIRECT_REGISTRATION_PAGE;
@@ -34,7 +33,7 @@ public class Registration implements Command {
             return REDIRECT_REGISTRATION_PAGE;
         }
 
-        UserDaoService.create(new UserBuilder().setUsername(username.toLowerCase()).setPassword(password)
+        UserDaoUtil.create(new User.UserBuilder().setUsername(username.toLowerCase()).setPassword(password)
                 .setRole(User.Role.USER).buildUser());
 
         return REDIRECT_LOGIN_PAGE;

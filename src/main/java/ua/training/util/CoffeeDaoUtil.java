@@ -1,4 +1,4 @@
-package ua.training.model.service;
+package ua.training.util;
 
 import ua.training.model.dao.CoffeeDao;
 import ua.training.model.dao.DaoFactory;
@@ -6,7 +6,7 @@ import ua.training.model.entity.Coffee;
 
 import java.util.List;
 
-public class CoffeeDaoService {
+public class CoffeeDaoUtil {
 
     private final static CoffeeDao dao = DaoFactory.getInstance().createCoffeeDao();
 

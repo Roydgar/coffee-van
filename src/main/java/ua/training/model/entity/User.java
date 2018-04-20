@@ -81,4 +81,33 @@ public class User {
     public enum Role {
         USER, ADMIN, UNKNOWN;
     }
+
+    public static class UserBuilder {
+        private User user = new User();
+
+        public UserBuilder() {
+        }
+
+        public UserBuilder setId(int id) {
+            user.setId(id);
+            return this;
+        }
+
+        public UserBuilder setUsername(String name) {
+            user.setUsername(name);
+            return this;
+        }
+
+        public UserBuilder setPassword(String password) {
+            user.setPassword(password);
+            return this;
+        }
+
+        public UserBuilder setRole(Role role) {
+            user.setRole(role);
+            return this;
+        }
+
+        public User buildUser() { return user; }
+    }
 }

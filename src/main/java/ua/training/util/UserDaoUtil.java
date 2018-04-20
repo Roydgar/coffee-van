@@ -1,4 +1,4 @@
-package ua.training.model.service;
+package ua.training.util;
 
 import ua.training.model.dao.CoffeeDao;
 import ua.training.model.dao.DaoFactory;
@@ -8,7 +8,7 @@ import ua.training.model.entity.User;
 
 import java.util.List;
 
-public class UserDaoService {
+public class UserDaoUtil {
 
     private final static UserDao dao = DaoFactory.getInstance().createUserDao();
 

@@ -1,13 +1,16 @@
 package ua.training.controller.command.admin;
 
 import ua.training.controller.command.Command;
+import ua.training.model.entity.Coffee;
 import ua.training.model.entity.CoffeeState;
-import ua.training.model.entity.builder.CoffeeBuilder;
-import ua.training.model.service.CoffeeDaoService;
+import ua.training.model.service.CoffeeService;
+import ua.training.util.CoffeeDaoUtil;
+import ua.training.util.constants.AttributeNames;
 
 import javax.servlet.http.HttpServletRequest;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import static ua.training.util.constants.URLs.EDIT_COFFEE_PAGE;
 import static ua.training.util.constants.URLs.SHOW_COFFEES_PAGE;
@@ -18,21 +21,16 @@ public class EditCoffee implements Command{
     @Override
     public String execute(HttpServletRequest request) {
 
-        String name = request.getParameter("name");
-        String weight = request.getParameter("weight");
-        String state  = request.getParameter("state");
-        String price  = request.getParameter("price");
+        Optional<Coffee> coffee = Optional.ofNullable(CoffeeService.createCoffee(request));
 
-
-        if (name == null) {
-            coffeeId = Integer.parseInt(request.getParameter("id"));
+        if (!coffee.isPresent()) {
+            coffeeId = Integer.parseInt(request.getParameter(AttributeNames.ID));
             return EDIT_COFFEE_PAGE;
         }
 
-        CoffeeDaoService.update(new CoffeeBuilder().setId(coffeeId).setName(name).setWeight(Integer.parseInt(weight))
-        .setState(CoffeeState.valueOf(state)).setPrice(new BigDecimal(price)).buildCoffee());
+        CoffeeDaoUtil.update(coffee.get());
 
-        request.getSession().setAttribute("coffees", CoffeeDaoService.findAll());
+        request.getSession().setAttribute(AttributeNames.COFFEES, CoffeeDaoUtil.findAll());
         return SHOW_COFFEES_PAGE;
     }
 }

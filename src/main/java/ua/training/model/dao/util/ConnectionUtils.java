@@ -16,12 +16,11 @@ public class ConnectionUtils {
     }
 
     public static Connection getCoffeeDbConnection() throws SQLException {
-        Connection connection = DriverManager.getConnection(COFFEE_DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
-        return connection;
+        return DriverManager.getConnection(COFFEE_DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
     }
 
     public static Connection getUserDbConnection() throws SQLException {
-        Connection connection = DriverManager.getConnection(USER_DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
-        return connection;
+        return DriverManager.getConnection(USER_DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
     }
+
 }

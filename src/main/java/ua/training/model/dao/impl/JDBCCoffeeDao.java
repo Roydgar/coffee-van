@@ -6,7 +6,6 @@ import ua.training.model.dao.impl.constants.ColumnNames;
 import ua.training.model.dao.impl.constants.Queries;
 import ua.training.model.entity.Coffee;
 import ua.training.model.entity.CoffeeState;
-import ua.training.model.entity.builder.CoffeeBuilder;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -29,7 +28,7 @@ public class JDBCCoffeeDao implements CoffeeDao {
             ps.setString(1 , coffee.getName());
             ps.setInt(2 , coffee.getWeight());
             ps.setString(3 , coffee.getState().toString());
-            ps.setString(4, coffee.getPrice().toString());
+            ps.setBigDecimal(4, coffee.getPrice());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -59,9 +58,9 @@ public class JDBCCoffeeDao implements CoffeeDao {
         String name  =  rs.getString(ColumnNames.COFFEE_NAME) ;
         int weight   =  rs.getInt(ColumnNames.COFFEE_WEIGHT);
         String state =  rs.getString(ColumnNames.COFFEE_STATE);
-        String price =  rs.getString(ColumnNames.COFFEE_PRICE);
-        return new CoffeeBuilder().setId(id).setName(name).setWeight(weight).
-                setState(CoffeeState.valueOf(state)).setPrice(new BigDecimal(price)).buildCoffee();
+        BigDecimal price =  rs.getBigDecimal(ColumnNames.COFFEE_PRICE);
+        return new Coffee.CoffeeBuilder().setId(id).setName(name).setWeight(weight).
+                setState(CoffeeState.valueOf(state)).setPrice(price).buildCoffee();
     }
 
     @Override
@@ -87,7 +86,7 @@ public class JDBCCoffeeDao implements CoffeeDao {
             ps.setString(1 , coffee.getName());
             ps.setInt(2 , coffee.getWeight());
             ps.setString(3 , coffee.getState().toString());
-            ps.setString(4, coffee.getPrice().toString());
+            ps.setBigDecimal(4, coffee.getPrice());
             ps.setInt(5, coffee.getId());
             ps.executeUpdate();
         } catch (SQLException e) {

@@ -1,7 +1,6 @@
 package ua.training.controller.command;
 
 import ua.training.model.entity.Coffee;
-import ua.training.model.service.CoffeeDaoService;
 import ua.training.util.SearchUtil;
 import ua.training.util.constants.AttributeNames;
 
